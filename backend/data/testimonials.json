@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Arthur Pendelton",
+    "role": "CEO, ApexCorp",
+    "content": "The team delivered an outstanding enterprise dashboard system. Their engineers are top-notch and completed the project on time.",
+    "rating": 5,
+    "order": 1
+  },
+  {
+    "name": "Sarah Smith",
+    "role": "VP of Engineering, Vertex Systems",
+    "content": "Excellent collaboration on the decentralized data broker. Highly recommend their backend engineering expertise.",
+    "rating": 5,
+    "order": 2
+  },
+  {
+    "name": "Michael Brown",
+    "role": "Product Director, NovaSoft",
+    "content": "Superb quality and customer support throughout the project. The UI toolkit is incredibly easy to customize.",
+    "rating": 5,
+    "order": 3
+  }
+]

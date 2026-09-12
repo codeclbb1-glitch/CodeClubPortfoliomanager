@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Peshawar Services Club",
+    "projectType": "Mobile App",
+    "description": "Complete solution with product management, orders, insights, and a sleek admin panel—fast and scalable.",
+    "image": "/assets/casestudy/psc-app.jpeg",
+    "tags": ["Full-Stack", "Mobile App", "CMS"],
+    "techStack": "Full-Stack, Mobile App, CMS",
+    "link": "",
+    "liveLink": "",
+    "order": 1
+  },
+  {
+    "title": "SavSplit",
+    "projectType": "Mobile App",
+    "description": "Dual-mode app for personal and business use. Personal: split bills, track expenses. Business: manage inventory, record sales—like QuickBooks & Splitwise in one.",
+    "image": "/assets/casestudy/app_project.png",
+    "tags": ["Mobile App", "Finance", "Full-Stack"],
+    "techStack": "Mobile App, Finance, Full-Stack",
+    "link": "",
+    "liveLink": "",
+    "order": 2
+  },
+  {
+    "title": "Haasil - Multi vendor E-commerce Platform",
+    "projectType": "E-Commerce",
+    "description": "A comprehensive e-commerce platform supporting multiple vendors with features like product management, order tracking, and analytics.",
+    "image": "/assets/casestudy/web-hassil.jpg",
+    "tags": ["Full-Stack", "E-Commerce", "CMS"],
+    "techStack": "Full-Stack, E-Commerce, CMS",
+    "link": "https://haasil.store/",
+    "liveLink": "https://haasil.store/",
+    "order": 3
+  },
+  {
+    "title": "SEIZURE SENSE",
+    "projectType": "AI/ML",
+    "description": "An AI/ML-based system that analyzes brain signals (EEG DATA) to predict epileptic seizures in advance. It alerts the patient before an attack.",
+    "image": "/assets/casestudy/ai_project.png",
+    "tags": ["AI/ML", "Healthcare", "Python"],
+    "techStack": "AI/ML, Healthcare, Python",
+    "link": "",
+    "liveLink": "",
+    "order": 4
+  },
+  {
+    "title": "NovaSuite – AI SaaS Platform",
+    "projectType": "AI/ML",
+    "description": "A powerful AI SaaS platform offering image generation, blog suggestions, background removal, resume review, and disease diagnostics.",
+    "image": "/assets/casestudy/web_project1.png",
+    "tags": ["AI/ML", "SaaS", "Web Development"],
+    "techStack": "AI/ML, SaaS, Web Development",
+    "link": "",
+    "liveLink": "",
+    "order": 5
+  },
+  {
+    "title": "Custom LMS Education Platform",
+    "projectType": "Education",
+    "description": "Supports live classes, quizzes, certification, and user dashboards for students, instructors, and admins. Built for scale.",
+    "image": "/assets/casestudy/web_project3.png",
+    "tags": ["Full-Stack", "Education", "LMS"],
+    "techStack": "Full-Stack, Education, LMS",
+    "link": "",
+    "liveLink": "",
+    "order": 6
+  }
+]

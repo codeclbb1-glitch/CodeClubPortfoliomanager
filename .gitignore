@@ -26,10 +26,7 @@ uploads/temp/
 *.jpg
 *.png
 test_*.pdf
-seed.js
-seed-certs.js
 convert_to_png.py
 deploy_assets.py
 extract_assets.py
 test-pdf.js
-data/

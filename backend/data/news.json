@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Code Club and Peshawar Services Club Partnership",
+    "description": "Code Club and Peshawar Services Club have officially signed a partnership agreement aimed at strengthening collaboration between innovation and leadership. The agreement was formalized by Major Suhail Afzal, Secretary of Peshawar Services Club, along with Mr. Abdullah Qureshi, CEO of Code Club, and Mr. Muhammad Affan, CTO of Code Club.",
+    "image": "/assets/news/news5.jpeg",
+    "date": "October 16, 2025",
+    "order": 1
+  },
+  {
+    "title": "Innovation Session at Lincoln Corners Pakistan",
+    "description": "Mr. Abdullah Qureshi and Mr. Muhammad Affan, students of BCS 7th Semester and founding team members of Code Club, proudly represented their startup at the Pakistan One event organized by the Ministry of Planning, Development and Special Initiatives.",
+    "image": "/assets/news/news6.jpeg",
+    "date": "October 1, 2025",
+    "order": 2
+  },
+  {
+    "title": "CodeClub Founders Represent at Pakistan One",
+    "description": "Founding team members of Code Club represented their startup at the Pakistan One event, showcasing youth-led technology innovation.",
+    "image": "/assets/news/news2.jpg",
+    "date": "August 25, 2025",
+    "order": 3
+  },
+  {
+    "title": "CodeClub Inauguration Ceremony",
+    "description": "Students of IM Sciences Peshawar have launched Code Club, a self-help software house to promote technology, modern trends, and income opportunities.",
+    "image": "/assets/news/news1.jpeg",
+    "date": "July 21, 2025",
+    "order": 4
+  }
+]

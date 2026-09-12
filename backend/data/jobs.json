@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "j1",
+    "id": "j1",
+    "title": "Full Stack Developer (MERN)",
+    "company": "Code Club",
+    "location": "Remote / Peshawar",
+    "salary": "PKR 150,000 - 220,000",
+    "job_type": "Full-time",
+    "description": "We are seeking an experienced Full Stack Developer to build modern web and mobile applications.",
+    "skills": "React, Node.js, Express, MongoDB, TailwindCSS",
+    "deadline": "2026-10-30",
+    "status": "active"
+  },
+  {
+    "_id": "j2",
+    "id": "j2",
+    "title": "Frontend Engineer (React / Next.js)",
+    "company": "Code Club",
+    "location": "Remote",
+    "salary": "PKR 120,000 - 180,000",
+    "job_type": "Full-time",
+    "description": "Looking for a passionate frontend engineer with exceptional UI/UX and React skills.",
+    "skills": "React, Next.js, TypeScript, TailwindCSS",
+    "deadline": "2026-10-30",
+    "status": "active"
+  },
+  {
+    "_id": "j3",
+    "id": "j3",
+    "title": "AI / Machine Learning Engineer",
+    "company": "Code Club",
+    "location": "Hybrid",
+    "salary": "PKR 180,000 - 250,000",
+    "job_type": "Full-time",
+    "description": "Build predictive AI and machine learning models for real-world healthcare and business applications.",
+    "skills": "Python, PyTorch, TensorFlow, FastAPI",
+    "deadline": "2026-11-15",
+    "status": "active"
+  }
+]
