@@ -46,12 +46,18 @@ async function login(req, res) {
 // GET /api/admin/setup
 async function setup(req, res) {
   try {
-    const admin = await Admin.findOne({ email: 'admin@jobportal.com' });
+    const email = 'codeclub@codeclub.tech';
+    const password = 'CodeClub3322';
+    let admin = await Admin.findOne({ email });
+    if (!admin) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      admin = await Admin.create({ name: 'Code Club Admin', email, password: hashedPassword });
+    }
     res.json({
       success: true,
       message: 'Database setup and admin check completed successfully',
-      adminExists: !!admin,
-      email: 'admin@jobportal.com'
+      adminExists: true,
+      email: admin.email
     });
   } catch (err) {
     console.error('Setup error:', err);
