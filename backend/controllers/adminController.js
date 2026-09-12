@@ -5,7 +5,6 @@ const Job = require('../models/Job');
 const Application = require('../models/Application');
 const News = require('../models/News');
 const Certificate = require('../models/Certificate');
-const { seedAdminAuto, seedContent } = require('../seed');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'job_portal_super_secret_jwt_key_2026';
 
@@ -19,13 +18,6 @@ async function login(req, res) {
 
     let admin = await Admin.findOne({ email: email.trim().toLowerCase() });
     
-    // Auto-seed if admin does not exist in the database yet
-    if (!admin) {
-      await seedAdminAuto();
-      await seedContent();
-      admin = await Admin.findOne({ email: email.trim().toLowerCase() });
-    }
-
     if (!admin) {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
@@ -54,8 +46,6 @@ async function login(req, res) {
 // GET /api/admin/setup
 async function setup(req, res) {
   try {
-    await seedAdminAuto();
-    await seedContent();
     const admin = await Admin.findOne({ email: 'admin@jobportal.com' });
     res.json({
       success: true,

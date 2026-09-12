@@ -1,25 +1,12 @@
 const mongoose = require('mongoose');
 const app = require('../app');
 const connectDB = require('../config/db');
-const { seedAdminAuto, seedContent } = require('../seed');
-
-let isSeeded = false;
 
 module.exports = async (req, res) => {
   try {
     await connectDB();
-    if (!isSeeded && mongoose.connection.readyState === 1) {
-      try {
-        await seedAdminAuto();
-        await seedContent();
-        isSeeded = true;
-      } catch (seedErr) {
-        console.warn('Auto-seeding warning:', seedErr.message);
-      }
-    }
   } catch (dbErr) {
     console.error('Serverless DB Error:', dbErr.message);
-    // If hitting root or API base path while DB is not ready, return informative status
     if (req.url === '/' || req.url === '/api' || req.url === '/api/') {
       return res.status(503).json({
         success: false,
