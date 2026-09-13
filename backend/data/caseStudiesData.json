@@ -1,0 +1,167 @@
+[
+  {
+    "title": "Peshawar Services Club",
+    "description": "Complete solution with product management, orders, insights, and a sleek admin panel—fast and scalable.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279456/job_portal/casestudies/ffgph7tlt5phkxkolsok.jpg",
+    "tags": [
+      "Full-Stack",
+      "Mobile App",
+      "CMS"
+    ],
+    "url": null
+  },
+  {
+    "title": "SavSplit",
+    "description": "Dual-mode app for personal and business use. Personal: split bills, track expenses. Business: manage inventory, record sales—like QuickBooks & Splitwise in one.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279457/job_portal/casestudies/k2f5rlmvutyinfz1dw5l.png",
+    "tags": [
+      "Mobile App",
+      "Finance",
+      "Full-Stack"
+    ],
+    "url": null
+  },
+  {
+    "title": "Haasil - Multi vendor E-commerce Platform",
+    "description": "A comprehensive e-commerce platform supporting multiple vendors with features like product management, order tracking, and analytics.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279458/job_portal/casestudies/b03alfewohgaiyyezik7.jpg",
+    "tags": [
+      "Full-Stack",
+      "E-Commerce",
+      "CMS"
+    ],
+    "url": "https://haasil.store/"
+  },
+  {
+    "title": "SEIZURE SENSE",
+    "description": "AN AI/ML-based system that analyzes brain signals (EEG DATA) to predict epileptic seizures in advance. It alerts the patient before an attack, allowing them to move to a safe environment and reduce the risk of injury.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279460/job_portal/casestudies/lpzdctnsq50rta01evmx.png",
+    "tags": [
+      "AI/ML",
+      "Healthcare",
+      "Python"
+    ],
+    "url": null
+  },
+  {
+    "title": "NovaSuite – AI SaaS Platform for Creative & Diagnostic Tools",
+    "description": "A powerful AI SaaS platform offering image generation, blog suggestions, background removal, resume review, and disease diagnostics—streamlining work through smart automation.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279461/job_portal/casestudies/rdwqpzo4mogxdbtxtztm.png",
+    "tags": [
+      "AI/ML",
+      "SaaS",
+      "Web Development"
+    ],
+    "url": null
+  },
+  {
+    "title": "Custom LMS for an Education Platform",
+    "description": "Supports live classes, quizzes, certification, and user dashboards for students, instructors, and admins. Built for scale.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279462/job_portal/casestudies/gwrycug5jcmdwm4e5ald.png",
+    "tags": [
+      "Full-Stack",
+      "Education",
+      "LMS"
+    ],
+    "url": null
+  },
+  {
+    "title": "Essence — Scalable E-commerce Platform",
+    "description": "A modern e-commerce app with smart search, secure checkout, and mobile-first design for smooth shopping across devices.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279477/job_portal/casestudies/hpjovmwcszqinijwhfqb.png",
+    "tags": [
+      "Web Development",
+      "E-Commerce",
+      "UI/UX"
+    ],
+    "url": null
+  },
+  {
+    "title": "Shopify — Full-featured E-commerce & Admin Panel",
+    "description": "Complete solution with product management, orders, insights, and a sleek admin panel—fast and scalable.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279480/job_portal/casestudies/nodjiichv295kixc5hlz.png",
+    "tags": [
+      "Full-Stack",
+      "E-Commerce",
+      "Admin Panel"
+    ],
+    "url": null
+  },
+  {
+    "title": "Zmong Khyber Game Show",
+    "description": "Complete solution with product management, orders, insights, and a sleek admin panel—fast and scalable.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279485/job_portal/casestudies/hft9ozd7h6a0k2hmw9wv.png",
+    "tags": [
+      "Web Development",
+      "Entertainment",
+      "UI/UX"
+    ],
+    "url": null
+  },
+  {
+    "title": "Federal Youth Parliament",
+    "description": "Complete solution with product management, orders, insights, and a sleek admin panel—fast and scalable.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279490/job_portal/casestudies/j72s0wur3uwzytie6awp.jpg",
+    "tags": [
+      "Web Development",
+      "Civic Tech",
+      "Full-Stack"
+    ],
+    "url": null
+  },
+  {
+    "title": "VibeHive — Real-time Chat & Collaboration App",
+    "description": "Group chat, media sharing, presence indicators, and a clean UI. Built for seamless team and community communication.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279519/job_portal/casestudies/gikunzqkfmjzpujxcvd0.png",
+    "tags": [
+      "Full-Stack",
+      "Real-Time",
+      "Chat"
+    ],
+    "url": null
+  },
+  {
+    "title": "Inventory Management System for a Multi location Retail Chain",
+    "description": "Tracks real-time stock, reduces overstocking, and streamlines supply operations. Includes barcode integration, role-based access, and reporting.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279530/job_portal/casestudies/leuqrzm76ortjvrosiib.png",
+    "tags": [
+      "Full-Stack",
+      "Retail",
+      "ERP"
+    ],
+    "url": null
+  },
+  {
+    "title": "Halatick — Restaurant Ordering & Management App",
+    "description": "Order dine-in, takeaway, or delivery. Includes digital menus, live order tracking, and table reservations.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279531/job_portal/casestudies/jb2rpwkzd8twuit866pg.png",
+    "tags": [
+      "Mobile App",
+      "Food & Beverage",
+      "Full-Stack"
+    ],
+    "url": null
+  },
+  {
+    "title": "Khyber Pakhtunkhwa — Tourism Discovery App",
+    "description": "Guides, maps, offline support, and trip planning to explore KP's historical, cultural, and natural treasures.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279532/job_portal/casestudies/egvxox3rsk1n2fpmeoni.png",
+    "tags": [
+      "Mobile App",
+      "Tourism",
+      "UI/UX"
+    ],
+    "url": null
+  },
+  {
+    "title": "Smart Dual Finance",
+    "description": "Same as above, presented for another use case. Finance management across personal and business settings.",
+    "image": "https://res.cloudinary.com/hghq4sap/image/upload/v1789279533/job_portal/casestudies/fckrm43mlxowhu8dhozf.png",
+    "tags": [
+      "Full-Stack",
+      "Finance",
+      "CyberSecurity"
+    ],
+    "url": null
+  }
+]

@@ -44,7 +44,7 @@ async function seedContent() {
         await Client.deleteMany({});
       }
       let clientsData = [];
-      const clientsJsonPath = path.join(__dirname, '..', 'data', 'clientsData.json');
+      const clientsJsonPath = path.join(__dirname, 'data', 'clientsData.json');
 
       const logoMap = {
         "Peshawar Service Club": "brand1.png",
@@ -81,13 +81,14 @@ async function seedContent() {
         try {
           const rawClients = JSON.parse(fs.readFileSync(clientsJsonPath, 'utf8'));
           clientsData = rawClients.map((item, idx) => {
-            const logoFile = logoMap[item.name] || logoMap[item.brandName] || 'brand1.png';
+            const logo = item.logo || item.image || '';
+            const resolvedLogo = logo && (logo.startsWith('http') || logo.startsWith('/')) ? logo : `/assets/clients/${logoMap[item.name] || logoMap[item.brandName] || 'brand1.png'}`;
             return {
               name: item.brandName || item.name,
               service: item.focus || 'Custom Software Solution',
               description: item.description || '',
               about: item.description || '',
-              logo: `/assets/clients/${logoFile}`,
+              logo: resolvedLogo,
               order: idx + 1
             };
           });
@@ -132,7 +133,7 @@ async function seedContent() {
         await Project.deleteMany({});
       }
       let projectsData = [];
-      const caseStudiesJsonPath = path.join(__dirname, '..', 'data', 'caseStudiesData.json');
+      const caseStudiesJsonPath = path.join(__dirname, 'data', 'caseStudiesData.json');
       if (fs.existsSync(caseStudiesJsonPath)) {
         try {
           const rawCases = JSON.parse(fs.readFileSync(caseStudiesJsonPath, 'utf8'));
@@ -185,48 +186,64 @@ async function seedContent() {
     if (teamCount === 0) {
       const teamData = [
         {
-          name: 'Sarah Jenkins',
-          designation: 'Chief Technology Officer',
-          experience: '12+',
-          stack: 'Systems Architecture, Kubernetes, Cloud Strategy',
-          photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+          name: 'Atif Muhammad',
+          designation: 'Team Lead',
+          experience: '5+',
+          stack: 'Leadership, Full-Stack, Project Management',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/atif-muhammad.jpg',
           order: 1
         },
         {
-          name: 'David Chen',
-          designation: 'Principal Engineer',
-          experience: '8+',
-          stack: 'Golang, Java, Distributed Databases, Kafka',
-          photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+          name: 'Abdul-Rehman',
+          designation: 'Senior Full-stack Developer',
+          experience: '4+',
+          stack: 'React, Node.js, MongoDB, Express',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/abdul-rehman.jpg',
           order: 2
         },
         {
-          name: 'Melissa Rodriguez',
-          designation: 'Lead Product Manager',
-          experience: '7',
-          stack: 'Agile Strategy, User Research, Product Roadmap',
-          photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
+          name: 'Abirullah',
+          designation: 'Full-stack Developer',
+          experience: '3+',
+          stack: 'MERN Stack, JavaScript, Python',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/abirullah.jpg',
           order: 3
         },
         {
-          name: 'Alex Mercer',
-          designation: 'Senior Frontend Developer',
-          experience: '6',
-          stack: 'React, Next.js, TailwindCSS, Web Performance',
-          photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
+          name: 'Muhammad Sannan Sherzada',
+          designation: 'MERN Stack Developer',
+          experience: '3+',
+          stack: 'MongoDB, Express, React, Node.js',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/muhammad-sannan.jpg',
           order: 4
         },
         {
-          name: 'Emily Watson',
-          designation: 'Senior UX Designer',
-          experience: '5',
-          stack: 'Figma, Wireframing, User Testing, Typography',
-          photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+          name: 'Malaika',
+          designation: 'Frontend Developer',
+          experience: '2+',
+          stack: 'React, TailwindCSS, JavaScript',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/malaika.jpg',
           order: 5
+        },
+        {
+          name: 'Muhammad Hisham',
+          designation: 'PERN Stack Developer',
+          experience: '2+',
+          stack: 'PostgreSQL, Express, React, Node.js',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/muhammad-hisham.jpg',
+          order: 6
+        },
+        {
+          name: 'Muhammad Waqas',
+          designation: 'MERN Stack Developer',
+          experience: '2+',
+          stack: 'MongoDB, Express, React, Node.js',
+          photo: 'https://res.cloudinary.com/hghq4sap/image/upload/v1720000000/team/muhammad-waqas.jpg',
+          order: 7
         }
       ];
       await Team.insertMany(teamData);
-      console.log('✅ 5 Team members seeded successfully!');
+      console.log(`✅ ${teamData.length} Team members seeded successfully!`);
     }
 
     // 4. Testimonials
@@ -283,75 +300,75 @@ async function seedContent() {
     if (jobCount === 0) {
       const jobsData = [
         {
-          title: 'Senior React Developer',
-          company: 'NovaSoft',
-          location: 'Remote (US/Canada)',
-          salary: '$110,000 - $130,000',
-          job_type: 'Full-time',
-          description: 'We are seeking a Senior React Developer to join our core product team. You will lead frontend architecture, optimize page load performance, and build interactive dashboards.',
-          requirements: '5+ years of experience with React.js, TypeScript, and modern state management (Redux/Zustand). Strong CSS skills.',
-          skills: 'React, TypeScript, Redux, TailwindCSS',
-          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
-          status: 'active'
-        },
-        {
-          title: 'DevOps Engineer',
-          company: 'ApexCorp',
-          location: 'New York, NY (Hybrid)',
-          salary: '$120,000 - $145,000',
-          job_type: 'Full-time',
-          description: 'Join our cloud platform team to manage Kubernetes clusters, build CI/CD pipelines, and secure cloud environments.',
-          requirements: 'Experience with AWS, Docker, Kubernetes, Terraform, and Github Actions. Strong scripting skills.',
-          skills: 'AWS, Kubernetes, Terraform, CI/CD',
-          deadline: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-          status: 'active'
-        },
-        {
-          title: 'Backend Developer (Golang)',
-          company: 'Vertex Systems',
-          location: 'Remote (Worldwide)',
-          salary: '$95,000 - $120,000',
-          job_type: 'Full-time',
-          description: 'Build robust, highly scalable microservices using Golang. You will work on database design, caching layers, and gRPC endpoints.',
-          requirements: '3+ years experience writing production Golang. Solid database design principles (PostgreSQL, Redis).',
-          skills: 'Golang, gRPC, PostgreSQL, Redis',
-          deadline: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
-          status: 'active'
-        },
-        {
-          title: 'UX/UI Design Intern',
-          company: 'Stellar Tech',
-          location: 'San Francisco, CA',
-          salary: '$25 - $35 / hour',
+          title: 'Full-stack Developer Intern',
+          company: 'Code Club',
+          location: 'Peshawar, Pakistan',
+          salary: 'Rs. 15,000 - 25,000 / month',
           job_type: 'Internship',
-          description: 'Learn and work alongside senior designers to create mockups, conduct user testing, and maintain our product design system.',
-          requirements: 'Figma proficiency, strong design portfolio, and basic understanding of user-centered design principles.',
-          skills: 'Figma, UI Design, Prototyping',
-          deadline: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+          description: 'Join our engineering team to build real-world web and mobile applications. Work with modern stacks like MERN, PERN, and Flutter while contributing to live client projects.',
+          requirements: 'Basic knowledge of HTML, CSS, JavaScript, and any backend framework. Eagerness to learn and work in a team.',
+          skills: 'JavaScript, React, Node.js, MongoDB',
+          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           status: 'active'
         },
         {
-          title: 'Product Marketing Manager',
-          company: 'Summit Consulting',
-          location: 'Chicago, IL (On-site)',
-          salary: '$90,000 - $110,000',
-          job_type: 'Contract',
-          description: 'Own the marketing launch of consulting frameworks and products. Conduct market analysis and collaborate with sales teams.',
-          requirements: 'Experience in tech/SaaS product marketing. Strong communication and data-driven copywriting skills.',
-          skills: 'Product Marketing, Copywriting, SEO',
-          deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000),
+          title: 'Frontend Developer Intern',
+          company: 'Code Club',
+          location: 'Peshawar, Pakistan',
+          salary: 'Rs. 15,000 - 25,000 / month',
+          job_type: 'Internship',
+          description: 'Work with our frontend team to build responsive, pixel-perfect UIs using React, TailwindCSS, and modern tooling.',
+          requirements: 'Knowledge of React.js, CSS, and basic state management. Portfolio of small projects is a plus.',
+          skills: 'React, TailwindCSS, JavaScript, Git',
+          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          status: 'active'
+        },
+        {
+          title: 'Backend Developer Intern',
+          company: 'Code Club',
+          location: 'Peshawar, Pakistan',
+          salary: 'Rs. 15,000 - 25,000 / month',
+          job_type: 'Internship',
+          description: 'Help design and maintain APIs, work with MongoDB, and build scalable backend services for client and internal products.',
+          requirements: 'Basic knowledge of Node.js, Express, and databases. Familiarity with REST APIs.',
+          skills: 'Node.js, Express, MongoDB, REST APIs',
+          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          status: 'active'
+        },
+        {
+          title: 'Mobile App Developer Intern',
+          company: 'Code Club',
+          location: 'Peshawar, Pakistan',
+          salary: 'Rs. 15,000 - 25,000 / month',
+          job_type: 'Internship',
+          description: 'Assist in building cross-platform mobile applications using Flutter or React Native. Contribute to apps used by real clients.',
+          requirements: 'Basic understanding of mobile development. Familiarity with Flutter or React Native is a plus.',
+          skills: 'Flutter, Dart, React Native, Mobile UI',
+          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          status: 'active'
+        },
+        {
+          title: 'UI/UX Designer Intern',
+          company: 'Code Club',
+          location: 'Peshawar, Pakistan',
+          salary: 'Rs. 15,000 - 25,000 / month',
+          job_type: 'Internship',
+          description: 'Work with the design team to create clean, user-friendly interfaces. Help with wireframes, prototypes, and design systems.',
+          requirements: 'Basic knowledge of Figma and design principles. Eye for clean, modern UI.',
+          skills: 'Figma, UI Design, Prototyping, Design Systems',
+          deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           status: 'active'
         }
       ];
       await Job.insertMany(jobsData);
-      console.log('✅ 5 Jobs seeded successfully!');
+      console.log(`✅ ${jobsData.length} Jobs seeded successfully!`);
     }
 
     // 6. News
     const newsCount = await News.countDocuments();
     if (newsCount === 0) {
       let newsItems = [];
-      const jsonPath = path.join(__dirname, '..', 'data', 'newsData.json');
+      const jsonPath = path.join(__dirname, 'data', 'newsData.json');
       if (fs.existsSync(jsonPath)) {
         try {
           const rawData = fs.readFileSync(jsonPath, 'utf8');
