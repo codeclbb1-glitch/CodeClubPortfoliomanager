@@ -32,7 +32,6 @@ export default function AdminSidebar() {
       <nav className="flex flex-col gap-1 text-sm font-medium flex-1">
         <Link to="/admin/dashboard" className={linkClass('/admin/dashboard')}>Dashboard</Link>
         <Link to="/admin/jobs" className={linkClass('/admin/jobs')}>Jobs</Link>
-        <Link to="/admin/jobs/create" className={linkClass('/admin/jobs/create')}>Create Job</Link>
         <Link to="/admin/applications" className={linkClass('/admin/applications')}>Applications</Link>
         <Link to="/admin/certificates" className={linkClass('/admin/certificates')}>Certificates</Link>
         <div className="border-t border-white/10 my-2"></div>

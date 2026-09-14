@@ -11,6 +11,7 @@ export default function Dashboard() {
 
   const cards = stats
     ? [
+        { label: 'Total Clients', value: stats.totalClients || 0, color: 'bg-orange-50 text-orange-700' },
         { label: 'Total Jobs', value: stats.totalJobs, color: 'bg-teal-light text-teal' },
         { label: 'Active Jobs', value: stats.activeJobs, color: 'bg-green-50 text-green-700' },
         { label: 'Total Applications', value: stats.totalApplications, color: 'bg-blue-50 text-blue-700' },

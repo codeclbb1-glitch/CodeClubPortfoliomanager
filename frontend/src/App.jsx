@@ -16,6 +16,7 @@ import AdminProjects from './pages/admin/Projects.jsx';
 import AdminTestimonials from './pages/admin/Testimonials.jsx';
 import AdminCertificates from './pages/admin/Certificates.jsx';
 import AdminTeam from './pages/admin/Team.jsx';
+import PublicVerify from './pages/PublicVerify.jsx';
 
 function PublicLayout({ children }) {
   return children;
@@ -51,6 +52,10 @@ export default function App() {
       <Route path="/admin/testimonials" element={<ProtectedRoute><AdminTestimonials /></ProtectedRoute>} />
       <Route path="/admin/certificates" element={<ProtectedRoute><AdminCertificates /></ProtectedRoute>} />
       <Route path="/admin/team" element={<ProtectedRoute><AdminTeam /></ProtectedRoute>} />
+
+      {/* Public certificate verification routes */}
+      <Route path="/verify" element={<PublicLayout><PublicVerify /></PublicLayout>} />
+      <Route path="/verify/:certificateId" element={<PublicLayout><PublicVerify /></PublicLayout>} />
 
       {/* Catch-all redirects to login */}
       <Route path="*" element={<Navigate to="/admin/login" replace />} />

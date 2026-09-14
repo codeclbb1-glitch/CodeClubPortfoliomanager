@@ -28,7 +28,7 @@ export default function CreateJob() {
       <main className="flex-1 p-8">
         <h1 className="text-2xl font-bold mb-6">Create Job</h1>
         {error && <p className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm max-w-2xl">{error}</p>}
-        <JobForm onSubmit={handleSubmit} submitting={submitting} />
+        <JobForm onSubmit={handleSubmit} submitting={submitting} className="max-w-full" />
       </main>
     </div>
   );

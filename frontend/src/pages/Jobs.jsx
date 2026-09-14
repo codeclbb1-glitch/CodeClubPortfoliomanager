@@ -2,29 +2,31 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import JobCard from '../components/JobCard.jsx';
-import { initialJobs } from '../data/initialData';
 
 export default function Jobs() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [jobs, setJobs] = useState(initialJobs);
-  const [loading, setLoading] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const [location, setLocation] = useState('');
   const [jobType, setJobType] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [apiError, setApiError] = useState('');
 
   useEffect(() => {
+    setLoading(true);
+    setApiError('');
     api
       .get('/jobs', { params: { search, location, job_type: jobType, page, limit: 9 } })
       .then((res) => {
-        if (res.data?.jobs && res.data.jobs.length > 0) {
-          setJobs(res.data.jobs);
-          setTotalPages(res.data.pagination?.totalPages || 1);
-        }
+        const list = res.data?.jobs || [];
+        setJobs(list);
+        setTotalPages(res.data?.pagination?.totalPages || 1);
       })
       .catch((err) => {
-        console.error('Failed to load jobs from API, using fallback:', err);
+        console.error('Failed to load jobs from API:', err);
+        setApiError('Unable to load jobs from server. Please try again later.');
       })
       .finally(() => setLoading(false));
   }, [search, location, jobType, page]);
@@ -71,6 +73,12 @@ export default function Jobs() {
           Search
         </button>
       </form>
+
+      {apiError && (
+        <div className="mb-6 p-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 text-sm">
+          {apiError}
+        </div>
+      )}
 
       {loading ? (
         <p className="text-muted">Loading jobs…</p>

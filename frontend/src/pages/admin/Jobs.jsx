@@ -10,13 +10,22 @@ export default function AdminJobs() {
   const [deleteConfirm, setDeleteConfirm] = useState({ show: false, id: null, title: '' });
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [authError, setAuthError] = useState('');
 
   function loadJobs() {
     setLoading(true);
+    setAuthError('');
     api.get('/jobs/admin/all', {
       params: { search, status: statusFilter }
     })
     .then((res) => setJobs(res.data.jobs || []))
+    .catch((err) => {
+      if (err.response?.status === 401 || err.response?.data?.message?.includes('token')) {
+        setAuthError('Please log in to view jobs.');
+      } else {
+        setAuthError('Failed to load jobs.');
+      }
+    })
     .finally(() => setLoading(false));
   }
 
@@ -76,6 +85,12 @@ export default function AdminJobs() {
             <option value="closed">Closed</option>
           </select>
         </div>
+
+        {authError && (
+          <div className="mb-4 p-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 text-sm">
+            {authError}
+          </div>
+        )}
 
         {loading ? (
           <p className="text-gray-500">Loading...</p>

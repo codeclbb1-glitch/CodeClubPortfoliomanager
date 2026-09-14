@@ -13,6 +13,11 @@ const CertificateSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  email: {
+    type: String,
+    required: false,
+    trim: true
+  },
   courseName: {
     type: String,
     required: true,
@@ -27,6 +32,24 @@ const CertificateSchema = new mongoose.Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  joiningDate: {
+    type: Date,
+    required: false
+  },
+  completionDate: {
+    type: Date,
+    required: false
+  },
+  progress: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  ceoReview: {
+    type: String,
+    required: false,
+    trim: true
   },
   hash: {
     type: String,

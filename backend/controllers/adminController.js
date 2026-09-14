@@ -5,6 +5,7 @@ const Job = require('../models/Job');
 const Application = require('../models/Application');
 const News = require('../models/News');
 const Certificate = require('../models/Certificate');
+const Client = require('../models/Client');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'job_portal_super_secret_jwt_key_2026';
 
@@ -68,7 +69,7 @@ async function setup(req, res) {
 // GET /api/admin/dashboard
 async function dashboard(req, res) {
   try {
-    const [totalJobs, activeJobs, totalApplications, pending, accepted, rejected, totalNews, totalCertificates, activeCertificates, revokedCertificates] = await Promise.all([
+    const [totalJobs, activeJobs, totalApplications, pending, accepted, rejected, totalNews, totalCertificates, activeCertificates, revokedCertificates, totalClients] = await Promise.all([
       Job.countDocuments(),
       Job.countDocuments({ status: 'active' }),
       Application.countDocuments(),
@@ -78,12 +79,13 @@ async function dashboard(req, res) {
       News.countDocuments(),
       Certificate.countDocuments(),
       Certificate.countDocuments({ status: 'Active' }),
-      Certificate.countDocuments({ status: 'Revoked' })
+      Certificate.countDocuments({ status: 'Revoked' }),
+      Client.countDocuments()
     ]);
 
     res.json({
       success: true,
-      stats: { totalJobs, activeJobs, totalApplications, pending, accepted, rejected, totalNews, totalCertificates, activeCertificates, revokedCertificates }
+      stats: { totalJobs, activeJobs, totalApplications, pending, accepted, rejected, totalNews, totalCertificates, activeCertificates, revokedCertificates, totalClients }
     });
   } catch (err) {
     console.error(err);

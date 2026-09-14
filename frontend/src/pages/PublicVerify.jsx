@@ -109,7 +109,16 @@ export default function PublicVerify() {
   const { verified, status, certificate } = result || {};
   const isRevoked = status === 'Revoked';
 
-  let cleanCourse = (certificate?.courseName || 'Frontend developer')
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const cleanCourse = (certificate?.courseName || 'Frontend developer')
     .replace(/course|certified|bootcamp/gi, '')
     .trim();
   if (!cleanCourse.toLowerCase().includes('developer') && !cleanCourse.toLowerCase().includes('designer') && !cleanCourse.toLowerCase().includes('engineer')) {
@@ -122,6 +131,9 @@ export default function PublicVerify() {
   const startDateVal = new Date(endDateVal.getTime() - 28 * 24 * 60 * 60 * 1000);
   const formattedStart = formatDate(startDateVal);
   const formattedEnd = formatDate(endDateVal);
+
+  const joiningFormatted = formatDate(certificate?.joiningDate);
+  const completionFormatted = formatDate(certificate?.completionDate);
 
   if (isRevoked) {
     return (
@@ -233,6 +245,51 @@ export default function PublicVerify() {
                 <p className="text-lg font-bold text-ink">{certificate?.instructorName}</p>
               </div>
             </div>
+            {joiningFormatted && (
+              <div className="flex items-start gap-3">
+                <Calendar className="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <p className="text-xs text-muted uppercase tracking-wider">Joining Date</p>
+                  <p className="text-lg font-bold text-ink">{joiningFormatted}</p>
+                </div>
+              </div>
+            )}
+            {completionFormatted && (
+              <div className="flex items-start gap-3">
+                <Calendar className="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <p className="text-xs text-muted uppercase tracking-wider">Completion Date</p>
+                  <p className="text-lg font-bold text-ink">{completionFormatted}</p>
+                </div>
+              </div>
+            )}
+            {certificate?.email && (
+              <div className="flex items-start gap-3">
+                <ShieldAlert className="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <p className="text-xs text-muted uppercase tracking-wider">Email</p>
+                  <p className="text-sm font-semibold text-ink break-all">{certificate.email}</p>
+                </div>
+              </div>
+            )}
+            {certificate?.progress && (
+              <div className="flex items-start gap-3 md:col-span-2">
+                <ShieldAlert className="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <p className="text-xs text-muted uppercase tracking-wider">Progress</p>
+                  <p className="text-sm font-semibold text-ink">{certificate.progress}</p>
+                </div>
+              </div>
+            )}
+            {certificate?.ceoReview && (
+              <div className="flex items-start gap-3 md:col-span-2">
+                <ShieldAlert className="w-5 h-5 text-muted mt-0.5" />
+                <div>
+                  <p className="text-xs text-muted uppercase tracking-wider">CEO Review</p>
+                  <p className="text-sm font-semibold text-ink whitespace-pre-line">{certificate.ceoReview}</p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="w-full bg-paper border border-hair rounded-xl p-4 mt-6 text-left text-xs text-muted space-y-1">

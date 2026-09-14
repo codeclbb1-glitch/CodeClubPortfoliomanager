@@ -7,7 +7,7 @@ const { generateCertificatePDF } = require('../utils/pdfGenerator');
 // @desc    Create a new certificate (Admin only)
 // @access  Private (Admin)
 async function createCertificate(req, res) {
-  const { studentName, courseName, instructorName, issueDate } = req.body;
+  const { studentName, courseName, instructorName, issueDate, email, joiningDate, completionDate, progress, ceoReview } = req.body;
 
   if (!studentName || !courseName || !instructorName) {
     return res.status(400).json({ success: false, message: 'Please provide all required fields (studentName, courseName, instructorName).' });
@@ -46,6 +46,11 @@ async function createCertificate(req, res) {
     // 3. Save Certificate in Database (issuedBy linked to authenticated Admin ID)
     const newCertificate = new Certificate({
       ...certPayload,
+      email: email || undefined,
+      joiningDate: joiningDate ? new Date(joiningDate) : undefined,
+      completionDate: completionDate ? new Date(completionDate) : undefined,
+      progress: progress || undefined,
+      ceoReview: ceoReview || undefined,
       hash,
       issuedBy: req.admin.id
     });
@@ -164,9 +169,14 @@ async function verifyCertificate(req, res) {
       certificate: {
         certificateId: certificate.certificateId,
         studentName: certificate.studentName,
+        email: certificate.email || null,
         courseName: certificate.courseName,
         instructorName: certificate.instructorName,
         issueDate: certificate.issueDate,
+        joiningDate: certificate.joiningDate || null,
+        completionDate: certificate.completionDate || null,
+        progress: certificate.progress || null,
+        ceoReview: certificate.ceoReview || null,
         status: certificate.status,
         issuedBy: certificate.issuedBy ? certificate.issuedBy.email : 'System Admin',
         revokedBy: certificate.revokedBy ? certificate.revokedBy.email : null,
@@ -176,6 +186,56 @@ async function verifyCertificate(req, res) {
   } catch (error) {
     console.error('Error verifying certificate:', error);
     res.status(500).json({ success: false, message: 'Server error verifying certificate' });
+  }
+}
+
+// PATCH /api/certificates/:certificateId
+// @desc    Update a certificate (Admin only)
+// @access  Private (Admin)
+async function updateCertificate(req, res) {
+  try {
+    const { certificateId } = req.params;
+    const updates = req.body || {};
+
+    const allowed = [
+      'studentName', 'email', 'courseName', 'instructorName', 'issueDate',
+      'joiningDate', 'completionDate', 'progress', 'ceoReview'
+    ];
+    const data = {};
+    allowed.forEach((field) => {
+      if (field in updates) {
+        data[field] = updates[field];
+      }
+    });
+
+    if (data.joiningDate) {
+      data.joiningDate = new Date(data.joiningDate);
+    }
+    if (data.completionDate) {
+      data.completionDate = new Date(data.completionDate);
+    }
+    if (data.issueDate) {
+      data.issueDate = new Date(data.issueDate);
+    }
+
+    const certificate = await Certificate.findOneAndUpdate(
+      { certificateId },
+      data,
+      { new: true, runValidators: true }
+    );
+
+    if (!certificate) {
+      return res.status(404).json({ success: false, message: 'Certificate not found.' });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Certificate updated successfully',
+      certificate
+    });
+  } catch (error) {
+    console.error('Error updating certificate:', error);
+    res.status(500).json({ success: false, message: 'Server error updating certificate' });
   }
 }
 
@@ -264,5 +324,6 @@ module.exports = {
   getCertificates,
   verifyCertificate,
   revokeCertificate,
-  downloadCertificatePDF
+  downloadCertificatePDF,
+  updateCertificate
 };

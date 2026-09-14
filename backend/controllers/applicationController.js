@@ -27,35 +27,41 @@ function getSafeUploadDir(subfolder) {
 // POST /api/applications  (public - candidate applies)
 async function createApplication(req, res) {
   try {
-    const { job_id, name, email, phone, address, education, experience, skills, linkedin, github, cover_letter } = req.body;
+    const body = req.body || {};
+    const jobId = body.job_id || body.jobId;
+    const name = body.name;
+    const email = body.email;
+    const phone = body.phone;
+    const address = body.address || '';
+    const education = body.education || '';
+    const experience = body.experience || '';
+    const skills = body.skills || '';
+    const linkedin = body.linkedin || '';
+    const github = body.github || '';
+    const coverLetter = body.cover_letter || body.coverLetter || '';
+    const resumeFile = req.file;
 
-    if (!job_id || !name || !email || !phone || !linkedin) {
-      return res.status(400).json({ success: false, message: 'job_id, name, email, phone, and linkedin are required' });
+    if (!jobId || !name || !email) {
+      return res.status(400).json({ success: false, message: 'job_id, name, and email are required' });
     }
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email.trim())) {
+    if (!emailRegex.test(String(email).trim())) {
       return res.status(400).json({ success: false, message: 'Invalid email address format' });
     }
 
-    const linkedinRegex = /^(https?:\/\/)?(www\.)?linkedin\.com\/.+$/i;
-    if (!linkedinRegex.test(linkedin.trim())) {
-      return res.status(400).json({ success: false, message: 'Please provide a valid LinkedIn profile URL (e.g. https://linkedin.com/in/username)' });
-    }
-
-    if (github && github.trim()) {
-      const githubRegex = /^(https?:\/\/)?(www\.)?github\.com\/.+$/i;
-      if (!githubRegex.test(github.trim())) {
-        return res.status(400).json({ success: false, message: 'Please provide a valid GitHub profile URL (e.g. https://github.com/username)' });
+    if (linkedin && String(linkedin).trim()) {
+      const linkedinRegex = /^(https?:\/\/)?(www\.)?linkedin\.com\/.+$/i;
+      if (!linkedinRegex.test(String(linkedin).trim())) {
+        return res.status(400).json({ success: false, message: 'Please provide a valid LinkedIn profile URL (e.g. https://linkedin.com/in/username)' });
       }
     }
 
-    if (!mongoose.Types.ObjectId.isValid(job_id)) {
+    if (!mongoose.Types.ObjectId.isValid(jobId)) {
       return res.status(400).json({ success: false, message: 'Invalid job_id' });
     }
 
-    // Verify that the job is available
-    const job = await Job.findById(job_id);
+    const job = await Job.findById(jobId);
     if (!job) {
       return res.status(404).json({ success: false, message: 'Job not found' });
     }
@@ -66,39 +72,42 @@ async function createApplication(req, res) {
       return res.status(400).json({ success: false, message: 'The application deadline for this job has passed' });
     }
 
-    if (!req.file) {
-      return res.status(400).json({ success: false, message: 'Resume (PDF) is required' });
-    }
-
     let resumePath = '';
-
-    // Upload to Cloudinary if configured
-    if (isCloudinaryConfigured()) {
-      try {
-        const uploadResult = await uploadResume(req.file.buffer, req.file.originalname);
-        resumePath = uploadResult.secure_url || uploadResult.url;
-      } catch (cloudErr) {
-        console.error('Cloudinary upload error, falling back to local storage:', cloudErr.message);
+    if (resumeFile) {
+      if (isCloudinaryConfigured()) {
+        try {
+          const uploadResult = await uploadResume(resumeFile.buffer, resumeFile.originalname);
+          resumePath = uploadResult.secure_url || uploadResult.url;
+        } catch (cloudErr) {
+          console.error('Cloudinary upload error, falling back to local storage:', cloudErr.message);
+          const uploadDir = getSafeUploadDir('resumes');
+          const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const filename = `resume-${unique}${path.extname(resumeFile.originalname || '.pdf')}`;
+          fs.writeFileSync(path.join(uploadDir, filename), resumeFile.buffer);
+          resumePath = `/uploads/resumes/${filename}`;
+        }
+      } else {
         const uploadDir = getSafeUploadDir('resumes');
         const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        const filename = `resume-${unique}${path.extname(req.file.originalname || '.pdf')}`;
-        fs.writeFileSync(path.join(uploadDir, filename), req.file.buffer);
+        const filename = `resume-${unique}${path.extname(resumeFile.originalname || '.pdf')}`;
+        fs.writeFileSync(path.join(uploadDir, filename), resumeFile.buffer);
         resumePath = `/uploads/resumes/${filename}`;
       }
-    } else {
-      // Local storage fallback
-      const uploadDir = getSafeUploadDir('resumes');
-      const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      const filename = `resume-${unique}${path.extname(req.file.originalname || '.pdf')}`;
-      fs.writeFileSync(path.join(uploadDir, filename), req.file.buffer);
-      resumePath = `/uploads/resumes/${filename}`;
     }
 
     const application = await Application.create({
-      job_id, name, email, phone, address, education, experience, skills,
-      linkedin: linkedin ? linkedin.trim() : undefined,
-      github: github ? github.trim() : undefined,
-      resume: resumePath, cover_letter
+      job_id: jobId,
+      name: String(name).trim(),
+      email: String(email).trim(),
+      phone: phone ? String(phone).trim() : undefined,
+      address: address || undefined,
+      education: education || undefined,
+      experience: experience || undefined,
+      skills: skills || undefined,
+      linkedin: linkedin ? String(linkedin).trim() : undefined,
+      github: github ? String(github).trim() : undefined,
+      resume: resumePath || undefined,
+      cover_letter: coverLetter || undefined
     });
 
     res.status(201).json({ success: true, message: 'Application submitted successfully', applicationId: application._id, resume: resumePath });
