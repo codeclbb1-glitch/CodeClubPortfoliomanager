@@ -109,15 +109,6 @@ export default function PublicVerify() {
   const { verified, status, certificate } = result || {};
   const isRevoked = status === 'Revoked';
 
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
   const cleanCourse = (certificate?.courseName || 'Frontend developer')
     .replace(/course|certified|bootcamp/gi, '')
     .trim();
