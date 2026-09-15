@@ -205,7 +205,7 @@ export default function AdminCertificates() {
     <div className="flex min-h-screen bg-paper text-ink">
       <AdminSidebar />
 
-      <main className="flex-1 p-8 max-w-6xl flex flex-col">
+      <main className="flex-1 p-8 min-w-0">
         <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <h1 className="font-display text-3xl font-bold">Manage Certificates</h1>
           <button
@@ -248,15 +248,15 @@ export default function AdminCertificates() {
           </span>
         </div>
 
-        <div className="bg-white border border-hair rounded-xl shadow-sm overflow-hidden flex-1 flex flex-col min-h-0">
+        <div className="bg-white border border-hair rounded-xl shadow-sm overflow-hidden">
           {loading ? (
             <div className="p-12 text-center text-muted">
               <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-teal mr-2"></div>
               Loading registry...
             </div>
           ) : (
-            <div className="overflow-x-auto flex-1">
-              <table className="w-full text-left text-sm h-full">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="bg-paper border-b border-hair text-xs font-mono tracking-wider uppercase text-muted">
                     <th className="p-4 font-semibold">Certificate ID / Recipient</th>
