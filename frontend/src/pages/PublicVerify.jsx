@@ -109,7 +109,7 @@ export default function PublicVerify() {
   const { verified, status, certificate } = result || {};
   const isRevoked = status === 'Revoked';
 
-  const cleanCourse = (certificate?.courseName || 'Frontend developer')
+  let cleanCourse = (certificate?.courseName || 'Frontend developer')
     .replace(/course|certified|bootcamp/gi, '')
     .trim();
   if (!cleanCourse.toLowerCase().includes('developer') && !cleanCourse.toLowerCase().includes('designer') && !cleanCourse.toLowerCase().includes('engineer')) {
