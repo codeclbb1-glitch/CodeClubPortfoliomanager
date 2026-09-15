@@ -292,6 +292,31 @@ async function revokeCertificate(req, res) {
   }
 }
 
+// DELETE /api/certificates/:certificateId
+// @desc    Delete a certificate (Admin only)
+// @access  Private (Admin)
+async function deleteCertificate(req, res) {
+  const { certificateId } = req.params;
+
+  try {
+    const certificate = await Certificate.findOne({ certificateId });
+
+    if (!certificate) {
+      return res.status(404).json({ success: false, message: 'Certificate not found.' });
+    }
+
+    await Certificate.findOneAndDelete({ certificateId });
+
+    res.status(200).json({
+      success: true,
+      message: 'Certificate deleted successfully.'
+    });
+  } catch (error) {
+    console.error('Error deleting certificate:', error);
+    res.status(500).json({ success: false, message: 'Server error deleting certificate' });
+  }
+}
+
 // GET /api/certificates/:certificateId/pdf
 // @desc    Generate and download PDF certificate (Public)
 // @access  Public
@@ -340,5 +365,6 @@ module.exports = {
   verifyCertificate,
   revokeCertificate,
   downloadCertificatePDF,
-  updateCertificate
+  updateCertificate,
+  deleteCertificate
 };

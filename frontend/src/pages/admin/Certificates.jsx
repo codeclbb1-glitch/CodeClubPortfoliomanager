@@ -32,6 +32,10 @@ export default function AdminCertificates() {
   const [revokeLoading, setRevokeLoading] = useState(false);
   const [revokeError, setRevokeError] = useState('');
 
+  const [deleteCertId, setDeleteCertId] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState('');
+
   const [editCert, setEditCert] = useState(null);
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState('');
@@ -123,6 +127,21 @@ export default function AdminCertificates() {
       setRevokeError(err.response?.data?.message || 'Failed to revoke certificate.');
     } finally {
       setRevokeLoading(false);
+    }
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deleteCertId) return;
+    setDeleteLoading(true);
+    setDeleteError('');
+    try {
+      await api.delete(`/certificates/${deleteCertId}`);
+      setDeleteCertId(null);
+      fetchCertificates();
+    } catch (err) {
+      setDeleteError(err.response?.data?.message || 'Failed to delete certificate.');
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
@@ -302,6 +321,12 @@ export default function AdminCertificates() {
                               Revoke
                             </button>
                           )}
+                          <button
+                            onClick={() => setDeleteCertId(cert.certificateId)}
+                            className="text-red-700 font-semibold hover:underline text-xs"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))
@@ -535,6 +560,45 @@ export default function AdminCertificates() {
                 className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-lg py-2.5 text-xs font-semibold transition-colors"
               >
                 {revokeLoading ? 'Revoking...' : 'Yes, Revoke'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Modal */}
+      {deleteCertId && (
+        <div className="fixed inset-0 bg-ink/75 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white border border-hair rounded-2xl p-6 max-w-sm w-full shadow-lg space-y-4">
+            <div className="text-center">
+              <span className="text-3xl">Delete</span>
+            </div>
+            <h3 className="font-display text-xl font-bold text-ink text-center">
+              Confirm Deletion
+            </h3>
+            <p className="text-xs text-muted leading-relaxed text-center">
+              Are you sure you want to permanently delete certificate <code className="bg-paper px-1 py-0.5 rounded border border-hair font-mono font-bold text-ink text-[11px]">{deleteCertId}</code>?
+              <br/><span className="text-red-600 font-medium">This action cannot be undone.</span>
+            </p>
+
+            {deleteError && (
+              <p className="text-red-600 text-xs font-medium text-center">{deleteError}</p>
+            )}
+
+            <div className="flex gap-3 pt-2">
+              <button
+                disabled={deleteLoading}
+                onClick={() => setDeleteCertId(null)}
+                className="flex-1 border border-hair rounded-lg py-2.5 text-xs font-semibold hover:bg-paper transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                disabled={deleteLoading}
+                onClick={handleDeleteConfirm}
+                className="flex-1 bg-red-700 hover:bg-red-800 text-white rounded-lg py-2.5 text-xs font-semibold transition-colors"
+              >
+                {deleteLoading ? 'Deleting...' : 'Yes, Delete'}
               </button>
             </div>
           </div>

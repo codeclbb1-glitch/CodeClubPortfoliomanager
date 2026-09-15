@@ -8,7 +8,8 @@ const {
   verifyCertificate,
   revokeCertificate,
   downloadCertificatePDF,
-  updateCertificate
+  updateCertificate,
+  deleteCertificate
 } = require('../controllers/certificateController');
 
 // Admin only routes
@@ -16,6 +17,7 @@ router.post('/', verifyAdmin, createCertificate);
 router.get('/', verifyAdmin, getCertificates);
 router.patch('/:certificateId', verifyAdmin, updateCertificate);
 router.patch('/:certificateId/revoke', verifyAdmin, revokeCertificate);
+router.delete('/:certificateId', verifyAdmin, deleteCertificate);
 
 // Public routes
 router.get('/verify/:certificateId', verifyLimiter, verifyCertificate);
