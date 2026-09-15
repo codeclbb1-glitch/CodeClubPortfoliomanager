@@ -218,20 +218,35 @@ async function updateCertificate(req, res) {
       data.issueDate = new Date(data.issueDate);
     }
 
-    const certificate = await Certificate.findOneAndUpdate(
-      { certificateId },
-      data,
-      { new: true, runValidators: true }
-    );
+    const certificate = await Certificate.findOne({ certificateId });
 
     if (!certificate) {
       return res.status(404).json({ success: false, message: 'Certificate not found.' });
     }
 
+    const hashedFields = ['studentName', 'courseName', 'instructorName', 'issueDate'];
+    const hasHashChange = hashedFields.some((field) => field in updates);
+
+    if (hasHashChange) {
+      data.hash = calculateHash({
+        certificateId: certificate.certificateId,
+        studentName: data.studentName ?? certificate.studentName,
+        courseName: data.courseName ?? certificate.courseName,
+        instructorName: data.instructorName ?? certificate.instructorName,
+        issueDate: data.issueDate ?? certificate.issueDate
+      });
+    }
+
+    const updatedCertificate = await Certificate.findOneAndUpdate(
+      { certificateId },
+      data,
+      { new: true, runValidators: true }
+    );
+
     res.status(200).json({
       success: true,
       message: 'Certificate updated successfully',
-      certificate
+      certificate: updatedCertificate
     });
   } catch (error) {
     console.error('Error updating certificate:', error);
