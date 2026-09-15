@@ -213,7 +213,7 @@ export default function AdminCertificates() {
             className="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-teal transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Issue Certificate
+            Issue New Certificate
           </button>
         </div>
 
