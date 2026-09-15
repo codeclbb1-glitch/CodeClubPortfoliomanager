@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #001C3D;
+  --color-paper: #F4F8FF;
+  --color-gold: #E3A62F;
+  --color-gold-dark: #C68A1C;
+  --color-teal: #005AE6;
+  --color-teal-light: #E6F0FF;
+  --color-muted: #526075;
+  --color-hair: #E0E6ED;
+
+  --font-display: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
