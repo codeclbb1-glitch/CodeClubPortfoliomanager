@@ -291,7 +291,7 @@ export default function PublicVerify() {
 
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
             <a
-              href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/certificates/${certificate?.certificateId}/pdf`}
+              href={`${import.meta.env.VITE_API_URL || 'https://code-club-portfoliomanager-obqd.vercel.app/api'}/certificates/${certificate?.certificateId}/pdf`}
               download
               className="flex items-center justify-center gap-2 bg-teal hover:bg-teal/90 text-white font-bold px-6 py-3.5 rounded-lg transition-all shadow-sm w-full sm:w-auto"
             >

@@ -23,7 +23,7 @@ export default function Home() {
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
+  const BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://code-club-portfoliomanager-obqd.vercel.app';
 
   const getClientLogoUrl = (logoPath) => {
     if (!logoPath) return null;

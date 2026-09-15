@@ -20,10 +20,10 @@ const app = express();
 
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:5173',
-  'https://code-club-portfoliomanager-g5wu.vercel.app',
+  'https://code-club-portfoliomanager-obqd.vercel.app',
   'https://codeclub.tech',
   'https://www.codeclub.tech',
-  'https://codeclubmanager.vercel.app',
+  'https://codeclubmanagment.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000'
 ];

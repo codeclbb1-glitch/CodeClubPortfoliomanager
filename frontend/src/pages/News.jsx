@@ -10,7 +10,7 @@ export default function News() {
   const [selectedNews, setSelectedNews] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  const BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000';
+  const BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://code-club-portfoliomanager-obqd.vercel.app';
 
   useEffect(() => {
     fetchNews();

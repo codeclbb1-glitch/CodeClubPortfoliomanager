@@ -288,7 +288,7 @@ export default function AdminCertificates() {
                             Edit
                           </button>
                           <a
-                            href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/certificates/${cert.certificateId}/pdf`}
+                            href={`${import.meta.env.VITE_API_URL || 'https://code-club-portfoliomanager-obqd.vercel.app/api'}/certificates/${cert.certificateId}/pdf`}
                             download
                             className="text-teal font-semibold hover:underline text-xs"
                           >

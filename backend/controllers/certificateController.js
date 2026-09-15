@@ -58,7 +58,7 @@ async function createCertificate(req, res) {
     await newCertificate.save();
 
     // 4. Generate QR code pointing to /verify/:certificateId
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const frontendUrl = process.env.FRONTEND_URL || 'https://codeclubmanagment.vercel.app';
     const verifyUrl = `${frontendUrl}/verify/${certificateId}`;
     const qrCodeDataUrl = await QRCode.toDataURL(verifyUrl, {
       width: 250,
@@ -303,7 +303,7 @@ async function downloadCertificatePDF(req, res) {
       return res.status(400).json({ success: false, message: 'Cannot generate PDF for a tampered certificate.' });
     }
 
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const frontendUrl = process.env.FRONTEND_URL || 'https://codeclubmanagment.vercel.app';
     const verifyUrl = `${frontendUrl}/verify/${certificateId}`;
 
     res.setHeader('Content-Type', 'application/pdf');

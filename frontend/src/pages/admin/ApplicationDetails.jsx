@@ -29,7 +29,7 @@ export default function ApplicationDetails() {
     );
   }
 
-  const apiBase = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
+  const apiBase = (import.meta.env.VITE_API_URL || 'https://code-club-portfoliomanager-obqd.vercel.app/api').replace('/api', '');
 
   return (
     <div className="flex">
