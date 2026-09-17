@@ -57,6 +57,12 @@ const generateCertificatePDF = async (certificate, verifyUrl) => {
         doc.image(logoPath, (width - logoWidth) / 2, 22, { width: logoWidth });
       }
 
+      // Intern ID at top-left, aligned with QR code left edge
+      doc.fillColor('#555555')
+         .font('Helvetica')
+         .fontSize(11)
+         .text(`Internee id: ${certificate.certificateId}`, 32, 30);
+
       // 4. Header Titles (Under Logo)
       doc.fillColor('#000000')
          .font('Helvetica-Bold')
@@ -86,10 +92,7 @@ const generateCertificatePDF = async (certificate, verifyUrl) => {
          .text(certificate.studentName, 0, 240, { align: 'center' });
 
       // 7. Internee ID in Exact Search Format: CC-[Year]-[Code] (e.g., CC-2026-KFAHMQ)
-      doc.fillColor('#555555')
-         .font('Helvetica')
-         .fontSize(12)
-         .text(`Internee id:${certificate.certificateId}`, 0, 310, { align: 'center' });
+      // Removed: moved to top-left above logo
 
       // Role / Course Name formatting
       let cleanCourse = (certificate.courseName || 'Frontend developer')
@@ -107,8 +110,10 @@ const generateCertificatePDF = async (certificate, verifyUrl) => {
          .fontSize(12.5)
          .text('In recognition of his successful efforts, dedication, and outstanding performance', 60, 330, { width: width - 120, align: 'center', lineGap: 4 });
 
-      doc.text(`during his internship as ${article} ${cleanCourse} at Code Club (SMC-PRIVATE)`, 60, 349, { width: width - 120, align: 'center' });
-      doc.text('LIMITED', 60, 368, { width: width - 120, align: 'center' });
+      doc.font('Helvetica-Bold')
+         .text(`during his internship as ${article} ${cleanCourse} at Code Club (SMC-PRIVATE)`, 60, 349, { width: width - 120, align: 'center' });
+      doc.font('Helvetica')
+         .text('LIMITED', 60, 368, { width: width - 120, align: 'center' });
 
       // 8. Duration Period
       const endDateVal = new Date(certificate.issueDate || Date.now());
@@ -133,6 +138,12 @@ const generateCertificatePDF = async (certificate, verifyUrl) => {
         }
       });
       doc.image(qrBuffer, 32, 452, { width: 94 });
+
+      // Scan to verify text under QR code
+      doc.fillColor('#777777')
+         .font('Helvetica')
+         .fontSize(9)
+         .text('Scan to verify', 32, 548, { width: 94, align: 'center' });
 
       // 10. Signature of Muhammad Affan (Bottom Right)
       const sigBoxX = width - 270;

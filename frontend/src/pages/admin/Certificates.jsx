@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import AdminSidebar from '../../components/AdminSidebar.jsx';
-import { Award, Plus, Search, Download, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Award, Plus, Search, Download, ChevronLeft, ChevronRight, X, ShieldCheck } from 'lucide-react';
 
 export default function AdminCertificates() {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ export default function AdminCertificates() {
   const [loading, setLoading] = useState(false);
 
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [studentName, setStudentName] = useState('');
   const [email, setEmail] = useState('');
@@ -73,11 +74,6 @@ export default function AdminCertificates() {
     setNewCertSuccess(null);
   }
 
-  function openCreateModal() {
-    resetCreateForm();
-    setShowCreateModal(true);
-  }
-
   const handleCreateCertificate = async (e) => {
     e.preventDefault();
     setFormError('');
@@ -104,7 +100,8 @@ export default function AdminCertificates() {
 
       if (res.data.success) {
         setNewCertSuccess(res.data);
-        resetCreateForm();
+        setShowCreateModal(false);
+        setShowSuccessModal(true);
         setPage(1);
         fetchCertificates();
       }
@@ -513,7 +510,8 @@ export default function AdminCertificates() {
                   className="flex-1 border border-hair rounded-lg py-2.5 text-xs font-semibold hover:bg-paper transition-colors"
                 >
                   Cancel
-                </button>
+                </button>cd "/home/abirullah/AllCode/CodeClube/Code/CodeClub-Portfolio"
+vercel --prod
                 <button
                   type="submit"
                   disabled={formLoading}
@@ -601,6 +599,41 @@ export default function AdminCertificates() {
                 {deleteLoading ? 'Deleting...' : 'Yes, Delete'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Success Modal */}
+      {showSuccessModal && newCertSuccess && (
+        <div className="fixed inset-0 bg-ink/75 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white border border-emerald-200 rounded-2xl p-6 max-w-sm w-full shadow-lg space-y-4 text-center">
+            <div className="w-14 h-14 bg-emerald-50 border border-emerald-200 rounded-full flex items-center justify-center text-emerald-600 mx-auto">
+              <ShieldCheck className="w-8 h-8" />
+            </div>
+            <h3 className="font-display text-xl font-bold text-ink">Certificate Created</h3>
+            <p className="text-xs text-muted">
+              Certificate <span className="font-mono font-bold text-ink">{newCertSuccess.certificate.certificateId}</span> was created successfully.
+            </p>
+            <div className="flex flex-col items-center gap-2">
+              <img
+                src={newCertSuccess.qrCode}
+                alt="Verification QR Code"
+                className="w-28 h-28 border border-hair rounded-lg p-1 bg-paper"
+              />
+              <a
+                href={`${import.meta.env.VITE_API_URL || 'https://code-club-portfoliomanager-obqd.vercel.app/api'}/certificates/${newCertSuccess.certificate.certificateId}/pdf`}
+                download
+                className="text-xs text-teal font-semibold hover:underline"
+              >
+                Download PDF Certificate
+              </a>
+            </div>
+            <button
+              onClick={() => setShowSuccessModal(false)}
+              className="mt-2 w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg py-2.5 text-xs font-semibold transition-colors"
+            >
+              Done
+            </button>
           </div>
         </div>
       )}
@@ -747,3 +780,10 @@ export default function AdminCertificates() {
     </div>
   );
 }
+
+
+
+
+
+
+

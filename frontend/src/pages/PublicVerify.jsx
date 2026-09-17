@@ -298,12 +298,6 @@ export default function PublicVerify() {
               <Download className="w-5 h-5" />
               <span>Download PDF Certificate</span>
             </a>
-            <Link
-              to="/verify"
-              className="flex items-center justify-center gap-2 bg-white border border-hair hover:bg-paper text-ink font-semibold px-6 py-3.5 rounded-lg w-full sm:w-auto"
-            >
-              <span>Verify Another ID</span>
-            </Link>
           </div>
         </div>
       </div>

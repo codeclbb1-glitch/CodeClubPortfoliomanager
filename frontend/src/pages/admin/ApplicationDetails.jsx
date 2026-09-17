@@ -31,6 +31,12 @@ export default function ApplicationDetails() {
 
   const apiBase = (import.meta.env.VITE_API_URL || 'https://code-club-portfoliomanager-obqd.vercel.app/api').replace('/api', '');
 
+  const resumeHref = app.resume
+    ? app.resume.startsWith('http')
+      ? app.resume
+      : `${apiBase}${app.resume}`
+    : null;
+
   return (
     <div className="flex">
       <AdminSidebar />
@@ -78,17 +84,19 @@ export default function ApplicationDetails() {
               <p className="text-gray-700 whitespace-pre-line">{app.cover_letter}</p>
             </div>
           )}
-          <p>
-            <span className="font-medium">Resume:</span>{' '}
-            <a
-              href={app.resume?.startsWith('http') ? app.resume : `${apiBase}${app.resume}`}
-              target="_blank"
-              rel="noreferrer"
-              className="text-teal hover:underline font-semibold inline-flex items-center gap-1"
-            >
-              View Document / PDF ↗
-            </a>
-          </p>
+          {resumeHref && (
+            <p>
+              <span className="font-medium">Resume:</span>{' '}
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noreferrer"
+                className="text-teal hover:underline font-semibold inline-flex items-center gap-1"
+              >
+                View Document / PDF ↗
+              </a>
+            </p>
+          )}
           <p><span className="font-medium">Status:</span> {app.status}</p>
         </div>
 
