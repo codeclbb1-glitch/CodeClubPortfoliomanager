@@ -515,8 +515,7 @@ export default function AdminCertificates() {
                   className="flex-1 border border-hair rounded-lg py-2.5 text-xs font-semibold hover:bg-paper transition-colors"
                 >
                   Cancel
-                </button>cd "/home/abirullah/AllCode/CodeClube/Code/CodeClub-Portfolio"
-vercel --prod
+                </button>
                 <button
                   type="submit"
                   disabled={formLoading}
