@@ -74,6 +74,11 @@ export default function AdminCertificates() {
     setNewCertSuccess(null);
   }
 
+  function openCreateModal() {
+    resetCreateForm();
+    setShowCreateModal(true);
+  }
+
   const handleCreateCertificate = async (e) => {
     e.preventDefault();
     setFormError('');
