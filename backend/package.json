@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "digest": "node scripts/dailyDigest.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.10.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "emailjs": "^5.0.3",
     "express": "^4.19.2",
     "express-rate-limit": "^7.3.1",
     "jsonwebtoken": "^9.0.2",

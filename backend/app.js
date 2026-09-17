@@ -4,16 +4,17 @@ const path = require('path');
 require('dotenv').config();
 
 const adminRoutes = require('./routes/adminRoutes');
+const imageUploadRoutes = require('./routes/imageUploadRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const testimonialRoutes = require('./routes/testimonialRoutes');
-const imageUploadRoutes = require('./routes/imageUploadRoutes');
 const certificateRoutes = require('./routes/certificateRoutes');
 const newsRoutes = require('./routes/newsRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const cronController = require('./controllers/cronController');
 const teamRoutes = require('./routes/teamRoutes');
 
 const app = express();
@@ -61,6 +62,9 @@ app.use('/api/news', newsRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/contact', messageRoutes);
 app.use('/api/team', teamRoutes);
+
+// Cron route for daily digest (Vercel Cron)
+app.get('/api/cron/daily-digest', cronController.runDailyDigest);
 
 // Fallback routes (without /api prefix) to prevent 404 Route Not Found
 app.use('/admin', adminRoutes);
